@@ -1,0 +1,8 @@
+var ForMaker = {
+    
+    newInput = function(){
+
+    }
+
+}
+
