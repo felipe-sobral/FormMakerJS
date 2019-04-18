@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -19,7 +19,23 @@
 
             require "lib/FormMaker.php";
 
-            $formulario = new FormMaker('{"id":"formulario", "input":{"id": "teste", "type": "text", "title": "Testando Formulario"}}');
+            $formulario = new FormMaker('{ 
+                "id": "formulario",
+                "framework": "bootstrap",                    
+                "components": {
+                                "c1": {
+                                        "shape": "input",
+                                        "id": "teste", 
+                                        "type": "number", 
+                                        "title": "Testando Formulario",
+                                        "placeholder": "TESTANDOOOO",
+                                        "help": "Campo ajuda"
+                                      }
+                              }
+            }');
+
+            $formulario->make();
+            $formulario->print();
         ?>
 
 
