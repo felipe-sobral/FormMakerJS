@@ -1,2 +1,2 @@
-# FormMakerJS
-Criador de formulários escrito com JavaScript
+# FormMakerPHP
+Criador de formulários escrito em PHP
