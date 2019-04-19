@@ -19,26 +19,7 @@
         }'
 
     */
-
-
-    // CONTINUAR AQUI
-    class Input {
-        private $html;
-
-        private function label($text){
-
-        }
-
-        function __construct($input){
-            
-            $html = "<div class='form-group'>
-                        <label for='{$input->id}'>Email address</label>
-                        <input type='{$input->type}' class='form-control' id='{$input->id}' aria-describedby='emailHelp' placeholder='Enter email'>
-                        <small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small>
-                    </div>";
-
-        }
-    }
+    require_once "lib/component.php";
 
     class FormMaker {
 
@@ -58,8 +39,8 @@
             try{
 
                 $obj->id = $this->id."-".$obj->id;
-                $input = New Input($obj);
-                return $input->produce();
+                $cp = New Component($obj);
+                return $cp->html();
 
             } catch(Exception $e){
                 return false;
@@ -71,7 +52,7 @@
 
             $arch = $this->obj;
 
-            $this->html .= "<form id='{$this->id}'>";
+            $this->html = "<form id='{$this->id}'>";
 
             foreach($arch->components as $component){
                 $this->html .= $this->produce($component);

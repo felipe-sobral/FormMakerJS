@@ -19,23 +19,56 @@
 
             require "lib/FormMaker.php";
 
-            $formulario = new FormMaker('{ 
+            function generator($qnt){
+                $comp ="";
+                for($i = 0; $i < $qnt; $i++){
+                    $comp .= '"c'.$i.'": {
+                                "shape": "input",
+                                "id": "teste", 
+                                "type": "text", 
+                                "label": "Teste ['.$i.']",
+                                "placeholder": "'.$i.'",
+                                "help": "Campo ajuda"
+                            },';
+                }
+
+                return $comp;
+            }
+
+            $json = '{ 
                 "id": "formulario",
                 "framework": "bootstrap",                    
                 "components": {
-                                "c1": {
+                                "comeco": {
                                         "shape": "input",
                                         "id": "teste", 
-                                        "type": "number", 
-                                        "title": "Testando Formulario",
-                                        "placeholder": "TESTANDOOOO",
+                                        "type": "text", 
+                                        "label": "Inicio",
+                                        "placeholder": "Teste [inicio]",
                                         "help": "Campo ajuda"
-                                      }
-                              }
-            }');
+                                      },
 
+                                '.generator(2).'
+                                
+                                "fim": {
+                                    "shape": "input",
+                                    "id": "teste", 
+                                    "type": "text", 
+                                    "label": "Fim",
+                                    "placeholder": "Teste [fim]",
+                                    "help": "Campo ajuda"
+                                  }
+                              }
+            }';
+
+            $time = microtime(true);
+
+            $formulario = new FormMaker($json);
             $formulario->make();
             $formulario->print();
+
+            $total = ((microtime(true) - $time)/1000);
+            echo "<br><br><small>Tempo de execução: $total</small>"
         ?>
 
 
