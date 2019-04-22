@@ -35,7 +35,7 @@
                 return $comp;
             }
 
-            $json = '{ 
+            /*$json = '{ 
                 "id": "formulario",
                 "framework": "bootstrap",                    
                 "components": {
@@ -48,7 +48,7 @@
                                         "help": "Campo ajuda"
                                       },
 
-                                '.generator(2).'
+                                '.generator(1000).'
                                 
                                 "fim": {
                                     "shape": "input",
@@ -59,16 +59,26 @@
                                     "help": "Campo ajuda"
                                   }
                               }
-            }';
+            }';*/
 
-            $time = microtime(true);
+            $json = '{
+                
+                "id": "formulario",
+                "components": {
+                                "input": {
+                                        "id": "teste", 
+                                        "type": "text", 
+                                        "label": "Inicio",
+                                        "placeholder": "Teste [inicio]",
+                                        "help": "Campo ajuda"
+                                }
+                              }
+
+            }';
 
             $formulario = new FormMaker($json);
             $formulario->make();
             $formulario->print();
-
-            $total = ((microtime(true) - $time)/1000);
-            echo "<br><br><small>Tempo de execução: $total</small>"
         ?>
 
 

@@ -5,7 +5,7 @@
         JSON
 
         '{ 
-            "id": "formulario",                   
+            "id": "formulario",                 
             "components": {
                             "input": {
                                      "shape": "input",
@@ -19,46 +19,37 @@
         }'
 
     */
-    require_once "lib/component.php";
+    require_once "lib/components/Controller.php";
 
     class FormMaker {
 
-        private $id;
-        private $obj;
-        private $html = "";
-
-        function __construct($json) {
+        private $form;
+        private $html;
+        
+        public function __construct($json) {
             
-            $this->obj = json_decode($json);
-            $this->id = $this->obj->id;
+            $this->form = json_decode($json);
 
         }
 
-        private function produce($obj){
+        private function produce($components){
 
-            try{
-
-                $obj->id = $this->id."-".$obj->id;
-                $cp = New Component($obj);
-                return $cp->html();
-
-            } catch(Exception $e){
-                return false;
-            }
-            
+            $components = New Controller($components);
+            return $components->html();
+    
         }
 
         public function make(){
 
-            $arch = $this->obj;
+            $arch = $this->form;
 
-            $this->html = "<form id='{$this->id}'>";
-
-            foreach($arch->components as $component){
-                $this->html .= $this->produce($component);
+            try {
+                $this->html = "<form id='{$arch->id}'>";
+                $this->html .= $this->produce($arch->components);
+                $this->html .= "</form>";
+            } catch (Exception $e){
+                return false;
             }
-
-            $this->html .= "</form>";
 
         }
 
