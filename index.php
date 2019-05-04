@@ -17,68 +17,30 @@
             ini_set('display_startup_erros',1);
             error_reporting(E_ALL);
 
-            require "lib/FormMaker.php";
-
-            function generator($qnt){
-                $comp ="";
-                for($i = 0; $i < $qnt; $i++){
-                    $comp .= '"c'.$i.'": {
-                                "shape": "input",
-                                "id": "teste", 
-                                "type": "text", 
-                                "label": "Teste ['.$i.']",
-                                "placeholder": "'.$i.'",
-                                "help": "Campo ajuda"
-                            },';
-                }
-
-                return $comp;
-            }
-
-            /*$json = '{ 
-                "id": "formulario",
-                "framework": "bootstrap",                    
-                "components": {
-                                "comeco": {
-                                        "shape": "input",
-                                        "id": "teste", 
-                                        "type": "text", 
-                                        "label": "Inicio",
-                                        "placeholder": "Teste [inicio]",
-                                        "help": "Campo ajuda"
-                                      },
-
-                                '.generator(1000).'
-                                
-                                "fim": {
-                                    "shape": "input",
-                                    "id": "teste", 
-                                    "type": "text", 
-                                    "label": "Fim",
-                                    "placeholder": "Teste [fim]",
-                                    "help": "Campo ajuda"
-                                  }
-                              }
-            }';*/
+            require "FormMaker.php";
 
             $json = '{
                 
                 "id": "formulario",
                 "components": {
-                                "input": {
-                                        "id": "teste", 
+                                "nome": {
+                                        "shape": "input",
                                         "type": "text", 
                                         "label": "Inicio",
-                                        "placeholder": "Teste [inicio]",
-                                        "help": "Campo ajuda"
+                                        "placeholder": "Digite aqui seu nome"
+                                },
+                                "senha": {
+                                        "shape": "input",
+                                        "type": "password", 
+                                        "label": "Inicio",
+                                        "placeholder": "Digite aqui sua senha"
                                 }
                               }
 
             }';
 
             $formulario = new FormMaker($json);
-            $formulario->make();
-            $formulario->print();
+            $formulario->make()->print();
         ?>
 
 
